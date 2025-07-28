@@ -38,6 +38,9 @@ Geforce RTX 3060 12GB & RAM 64GB 環境（RAM は 32GB でも動きそう）で 
 	- `wan2.2_vae.safetensors` は `ComfyUI/models/vae` に配置。
 5. `実行` で生成された動画が `output/video/` に保存されます。
 
+I2V は VRAM 消費が大きいようで、`拡散モデルを読み込む` の `重みdtype` を `fp8_e4m3fn` にしたら動きました。  
+解像度やフレーム数を下げてみても良いかもしれません。
+
 ## 仕様
 
 - `ComfyUi_Activate.bat` で `venv\Scripts\activate` したコンソールを開きます。
