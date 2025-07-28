@@ -24,6 +24,7 @@ NVIDIA ビデオカードを搭載した Windows PC で [ComfyUI](https://github
 
 - `ComfyUi.bat` で起動します。
 - `Update.bat` で更新します。
+	- `Update.bat` の実行前に `EasyTools/ComfyUi/` にある `ComfyUi_LatestVersion.bat` や `ComfyUiManager_LatestVersion.bat` を実行しておくと、その時点での最新リリースバージョンに更新できます。
 
 ## [Wan2.2 Day-0 Support in ComfyUI](https://blog.comfy.org/p/wan22-day-0-support-in-comfyui) 手順
 
