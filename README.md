@@ -23,11 +23,24 @@ NVIDIA ビデオカードを搭載した Windows PC で [ComfyUI](https://github
 ## 使い方
 
 - `ComfyUi.bat` で起動します。
-- `ComfyUi_Activate.bat` で `venv\Scripts\activate` したコンソールを開きます。
 - `Update.bat` で更新します。
+
+## [Wan2.2 Day-0 Support in ComfyUI](https://blog.comfy.org/p/wan22-day-0-support-in-comfyui) 手順
+
+Geforce RTX 3060 12GB & RAM 64GB 環境（RAM は 32GB でも動きそう）で [ComfyUI 公式 Wan 2.2 Day0 記事](https://blog.comfy.org/p/wan22-day-0-support-in-comfyui) の "Wan 2.2 5B Video Generation" を動かせました。以下公式そのまんまな手順。
+
+1. SimpleComfyUi をインストールして `ComfyUi.bat` で起動します。
+2. （左ではなく）上部メニューの `ワークフロー` - `テンプレートを参照` を選択。
+3. ダイアログ左側の `ビデオ` 選択で、右側の `Wan 2.2 5B Video Generation` を選択。
+4. 足りないモデルが 3種類表示されるので、それぞれダウンロードして配置。
+	- `wan2.2_ti2v_5B_fp16.safetensors` は `ComfyUI/models/diffusion_models` に配置。
+	- `umt5_xxl_fp8_e4m3fn_scaled.safetensors` は `ComfyUI/models/clip` に配置。
+	- `wan2.2_vae.safetensors` は `ComfyUI/models/vae` に配置。
+5. `実行` で生成された動画が `output/video/` に保存されます。
 
 ## 仕様
 
+- `ComfyUi_Activate.bat` で `venv\Scripts\activate` したコンソールを開きます。
 - Git にパスが通っていれば利用し、無ければポータブル版をインストールします。
 - Python は 3.12.x にパスが通っていれば利用し、無ければポータブル版をインストールします。
 - ComfyUI と ComfyUI Manager は、インストール時にリリースされている最新バージョンをインストールします。
