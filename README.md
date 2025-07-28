@@ -6,6 +6,13 @@ NVIDIA ビデオカードを搭載した Windows PC で [ComfyUI](https://github
 
 他のカスタムノードのインストールやモデルのダウンロードはしません。
 
+## Portable Package との主な違い
+
+- `ComfyUI Manager` をインストールします。
+- `triton` や `SageAttention` をインストールします。
+- トラブりがちなモジュール依存を予防します。
+- `python_embeded` 直接でなく `venv` 経由で利用します。
+
 ## インストール方法
 
 1. [SimpleComfyUiInstaller.bat](https://github.com/Zuntan03/SimpleComfyUi/raw/main/SimpleComfyUi/SimpleComfyUiInstaller.bat?ver=0) を右クリックから保存します。
@@ -16,6 +23,7 @@ NVIDIA ビデオカードを搭載した Windows PC で [ComfyUI](https://github
 ## 使い方
 
 - `ComfyUi.bat` で起動します。
+- `ComfyUi_Activate.bat` で `venv\Scripts\activate` したコンソールを開きます。
 - `Update.bat` で更新します。
 
 ## 仕様
