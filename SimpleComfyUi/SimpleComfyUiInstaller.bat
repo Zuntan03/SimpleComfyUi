@@ -123,6 +123,9 @@ if %ERRORLEVEL% neq 0 ( exit /b 1 )
 call :INIT_REPO %PROJECT_DIR% %PROJECT_URL% %PROJECT_BRANCH%
 if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
+call %EASY_TOOLS_DIR%\ComfyUi\ComfyUi_LatestVersion.bat
+call %EASY_TOOLS_DIR%\ComfyUi\ComfyUiManager_LatestVersion.bat
+
 call %PROJECT_SETUP_BAT%
 if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
