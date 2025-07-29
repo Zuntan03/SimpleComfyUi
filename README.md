@@ -76,6 +76,7 @@ Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに�
 	次の『Geforce RTX 3060 12GB での Kijai/WanVideoWrapper サンプル動作』を参考に対処してください。
 	- **2025/07/29 時点でワークフローからインストールされる Kijai/WanVideoWrapper はバージョンが一致せず、`WanVideoModelLoader` で `blocks.0.cross_attn.k_img.weight` エラーが発生します。**  
 		- 上部の `Manager` から `Custom Nodes In Workflow` し、`ComfyUI-WanVideoWrapper` の `Switch Ver` で `nightly` を `Select` して `Restart` してください。
+		- **また、エラーが起きている状態でワークフローを保存してしまうと、`Split_step` の接続の切れた状態で保存されて生成動画が白飛びするそうです。保存しない・ワークフローをダウンロードし直す、などで対処してください。**
 
 `Video Combine` の `frame_rate` は `24` が正しいかもしれません。
 
