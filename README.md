@@ -62,7 +62,8 @@ Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに�
 	- インストールが終わると、下に `変更を適用するには、ComfyUIを再起動してください` と表示されるので `再起動` します。
 4. 再起動が完了したら `実行する` でファイルが不足しているエラーが表示されますので、必要なファイルをダウンロードします。
 	- `oldman_upscaled.png` はお好みの画像をドラッグ＆ドロップします。
-		- 画像の内容に合わせて `WanVideo TextEncode` のプロンプトを書き換えます。
+		- 画像の内容に合わせて `WanVideo TextEncode` のプロンプトを書き換えます。  
+		**[プロンプト参考情報](https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts)**
 	- [Wan2_2-I2V-A14B-HIGH_fp8_e4m3fn_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-HIGH_fp8_e4m3fn_scaled_KJ.safetensors) と [Wan2_2-I2V-A14B-LOW_fp8_e4m3fn_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-LOW_fp8_e4m3fn_scaled_KJ.safetensors) を `ComfyUI/models/diffusion_models/WanVideo/2_2/` フォルダに置きます。
 		- **リッチなビデオカードでなければ、下で紹介している GGUF がオススメです。**
 	- [lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors) を `ComfyUI/models/loras/WanVideo/Lightx2v/` フォルダに置きます。
