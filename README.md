@@ -45,7 +45,13 @@ I2V は VRAM 消費が大きいようで、`拡散モデルを読み込む` の 
 
 ## [Kijai/WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper) の導入手順
 
-2025/07/29 の夕方時点で、Geforce RTX 3060 VRAM 12GB, RAM 64GB 環境において `512x768` の 81frame を 7分程度で生成できています。  
+2025/07/29 21:00  
+大きい方のモデルである I2V A14B の GGUF を試してみたら、VRAM 8GB & RAM 32GB で普通に利用できそうでした。  
+RAM を 1枚抜いた RAM 32GB シングルチャンネルと Geforce RTX 3060 12GB 環境では、余裕を持って利用できています。  
+メモリスワップ込みで RAM 16GB で利用できるかどうかは、わかりません。
+
+![](https://yyy.wpx.jp/2025/07/20250729-Wan22Day1-Q4Q3.webp)
+~~2025/07/29 の夕方時点で、Geforce RTX 3060 VRAM 12GB, RAM 64GB 環境において `512x768` の 81frame を 7分程度で生成できています。~~  
 Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに古くなる可能性が高いです。
 
 1. [example_workflows/](https://github.com/kijai/ComfyUI-WanVideoWrapper/tree/main/example_workflows) から利用したいワークフローをダウンロードします。
@@ -58,6 +64,7 @@ Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに�
 	- `oldman_upscaled.png` はお好みの画像をドラッグ＆ドロップします。
 		- 画像の内容に合わせて `WanVideo TextEncode` のプロンプトを書き換えます。
 	- [Wan2_2-I2V-A14B-HIGH_fp8_e4m3fn_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-HIGH_fp8_e4m3fn_scaled_KJ.safetensors) と [Wan2_2-I2V-A14B-LOW_fp8_e4m3fn_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-LOW_fp8_e4m3fn_scaled_KJ.safetensors) を `ComfyUI/models/diffusion_models/WanVideo/2_2/` フォルダに置きます。
+		- **リッチなビデオカードでなければ、下で紹介している GGUF がオススメです。**
 	- [lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors) を `ComfyUI/models/loras/WanVideo/Lightx2v/` フォルダに置きます。
 	- [umt5-xxl-enc-bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/umt5-xxl-enc-bf16.safetensors) を `ComfyUI/models/clip/` フォルダに置きます。
 	- [Wan2_1_VAE_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan2_1_VAE_bf16.safetensors) を `ComfyUI/models/vae/wanvideo/` フォルダに置きます。  
@@ -72,9 +79,11 @@ Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに�
 ### Geforce RTX 3060 12GB での [Kijai/WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper) サンプル動作
 
 - `WanVideo TextEncode` でエラーが出る場合は、`WanVideo T5 Text Encoder Loader` の `quantization` を `fp8_e4m3fn` にします。
-	- [umt5-xxl-enc-fp8_e4m3fn.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/umt5-xxl-enc-fp8_e4m3fn.safetensors) を代わりに利用するとメインメモリの消費を抑えられます。
-- Geforce RTX 30x0 ではふたつの `WanVideo Model Loader` で [Wan2_2-I2V-A14B-HIGH_fp8_e5m2_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-HIGH_fp8_e5m2_scaled_KJ.safetensors) と [Wan2_2-I2V-A14B-LOW_fp8_e5m2_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-LOW_fp8_e5m2_scaled_KJ.safetensors) を代わりに利用し、 `quantization` を `fp8_e5m2_scaled` に変更します。
-	- もしくは `WanVideo Torch Compile Settings` を `Ctrl+B` でミュートします。
+	- その場合は、[umt5-xxl-enc-fp8_e4m3fn.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/umt5-xxl-enc-fp8_e4m3fn.safetensors) を代わりに利用するとメインメモリの消費を抑えられます。
+- ~~Geforce RTX 30x0 ではふたつの `WanVideo Model Loader` で [Wan2_2-I2V-A14B-HIGH_fp8_e5m2_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-HIGH_fp8_e5m2_scaled_KJ.safetensors) と [Wan2_2-I2V-A14B-LOW_fp8_e5m2_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-LOW_fp8_e5m2_scaled_KJ.safetensors) を代わりに利用し、 `quantization` を `fp8_e5m2_scaled` に変更します。~~
+	- ~~もしくは `WanVideo Torch Compile Settings` を `Ctrl+B` でミュートします。~~
+- ふたつの `WanVideo Model Loader` で [wan2.2_i2v_high_noise_14B_Q4_K_M.gguf](https://huggingface.co/bullerwins/Wan2.2-I2V-A14B-GGUF/resolve/main/wan2.2_i2v_high_noise_14B_Q4_K_M.gguf) と [wan2.2_i2v_low_noise_14B_Q4_K_M.gguf](https://huggingface.co/bullerwins/Wan2.2-I2V-A14B-GGUF/resolve/main/wan2.2_i2v_low_noise_14B_Q4_K_M.gguf) を代わりに利用し、 `quantization` を `disabled` に変更します。
+	- 他の精度を選ぶなら [こちら](https://huggingface.co/bullerwins/Wan2.2-I2V-A14B-GGUF) から。
 - `WanVideo Block Swap` の `blocks_to_swap` を `40` に、`offload_img_emb` と `offload_txt_emb` を `true` にします。
 - まだ VRAM が足りない場合は `WanVideo ImageToVideo Encode` の `num_frames` を減らしたり、`Resize Image v2` の `width` や `height` を減らしたりします。
 
