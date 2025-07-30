@@ -10,7 +10,6 @@ NVIDIA ビデオカードを搭載した Windows PC で [ComfyUI](https://github
 
 - `ComfyUI Manager` をインストールします。
 - `triton` や `SageAttention` をインストールします。
-- トラブりがちなモジュール依存を予防します。
 - `python_embeded` 直接でなく `venv` 経由で利用します。
 
 ## インストール方法
@@ -36,7 +35,7 @@ Geforce RTX 3060 12GB & RAM 64GB 環境（RAM は 32GB でも動きそう）で 
 3. ダイアログ左側の `ビデオ` 選択で、右側の `Wan 2.2 5B Video Generation` を選択。
 4. 足りないモデルが 3種類表示されるので、それぞれダウンロードして配置。
 	- `wan2.2_ti2v_5B_fp16.safetensors` は `ComfyUI/models/diffusion_models` に配置。
-	- `umt5_xxl_fp8_e4m3fn_scaled.safetensors` は `ComfyUI/models/clip` に配置。
+	- `umt5_xxl_fp8_e4m3fn_scaled.safetensors` は `ComfyUI/models/text_encoders` に配置。
 	- `wan2.2_vae.safetensors` は `ComfyUI/models/vae` に配置。
 5. `実行` で生成された動画が `output/video/` に保存されます。
 
@@ -69,8 +68,7 @@ Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに�
 	- [lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors) を `ComfyUI/models/loras/WanVideo/Lightx2v/` フォルダに置きます。
 	- [umt5-xxl-enc-bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/umt5-xxl-enc-bf16.safetensors) を `ComfyUI/models/clip/` フォルダに置きます。
 	- [Wan2_1_VAE_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan2_1_VAE_bf16.safetensors) を `ComfyUI/models/vae/wanvideo/` フォルダに置きます。  
-	7/29 時点のワークフローでは、Wan 2.2 でなく Wan 2.1 の VAE が利用されています。
-		- Wan 2.2 版 [wan2.2_vae.safetensors](https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan2.2_vae.safetensors)
+		- 5B 用？の Wan 2.2 版 [wan2.2_vae.safetensors](https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan2.2_vae.safetensors)
 5. ファイルをダウンロードしたら `実行する` で動画を生成します。
 	- パソコンのスペックが十分出なかった場合はエラーが表示されます。  
 	次の『Geforce RTX 3060 12GB での Kijai/WanVideoWrapper サンプル動作』を参考に対処してください。
@@ -102,7 +100,6 @@ Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに�
 - `pip` で `venv` に各種モジュールをインストールします。
 	- `torch`, `torchvision`, `torchaudio`
 	- `triton`, `sageattention`
-	- 他、トラブルが起きがちなモジュール
 
 <!-- ## トラブルシューティング -->
 
