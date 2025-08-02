@@ -126,6 +126,11 @@ if %ERRORLEVEL% neq 0 ( exit /b 1 )
 call %EASY_TOOLS_DIR%\ComfyUi\ComfyUi_LatestVersion.bat
 call %EASY_TOOLS_DIR%\ComfyUi\ComfyUiManager_LatestVersion.bat
 
+@REM Python 3.10系を利用したい場合はコメント解除してから実行してください。
+@REM If you want to use Python 3.10 series, please uncomment the following line.
+
+@REM echo 3.10.6> "%EASY_TOOLS_DIR%\Python\Python_DefaultVersion.txt"
+
 call %PROJECT_SETUP_BAT%
 if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
