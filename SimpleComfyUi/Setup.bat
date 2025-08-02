@@ -15,8 +15,8 @@ if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 @REM if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 
 @REM ComfyUI-Impact-Pack\requirements.txt
-@REM echo pip install -qq numpy==1.26.4 opencv-python-headless==4.11.0.86 opencv-contrib-python==4.11.0.86 opencv-python==4.11.0.86
-@REM pip install -qq numpy==1.26.4 opencv-python-headless==4.11.0.86 opencv-contrib-python==4.11.0.86 opencv-python==4.11.0.86
-@REM if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
+echo pip install -qq numpy==1.26.4 opencv-python-headless==4.11.0.86 opencv-contrib-python==4.11.0.86 opencv-python==4.11.0.86
+pip install -qq numpy==1.26.4 opencv-python-headless==4.11.0.86 opencv-contrib-python==4.11.0.86 opencv-python==4.11.0.86
+if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 
 popd rem %~dp0..
