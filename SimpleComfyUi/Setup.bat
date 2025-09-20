@@ -19,7 +19,7 @@ echo pip install -qq numpy==1.26.4 opencv-python-headless==4.11.0.86 opencv-cont
 pip install -qq numpy==1.26.4 opencv-python-headless==4.11.0.86 opencv-contrib-python==4.11.0.86 opencv-python==4.11.0.86
 if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 
-@REM https://github.com/Zuntan03/EasyWan22/issues/1
+@REM https://github.com/Zuntan03/EasyWan22/issues/1 Python 3.12.x, ModuleNotFoundError: No module named 'yaml'
 echo pip install -qq PyYAML==6.0.2
 pip install -qq PyYAML==6.0.2
 if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )

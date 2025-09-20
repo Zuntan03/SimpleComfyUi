@@ -1,6 +1,6 @@
 ﻿# SimpleComfyUi
 
-諸々整備中。
+[English README](README_en.md)
 
 NVIDIA ビデオカードを搭載した Windows PC で [ComfyUI](https://github.com/comfyanonymous/ComfyUI) と [ComfyUI Manager](https://github.com/Comfy-Org/ComfyUI-Manager) を `venv` で [マニュアルインストール](https://github.com/comfyanonymous/ComfyUI?tab=readme-ov-file#manual-install-windows-linux) します。
 
@@ -27,74 +27,11 @@ NVIDIA ビデオカードを搭載した Windows PC で [ComfyUI](https://github
 - `Update.bat` で更新します。
 	- `Update.bat` の実行前に `EasyTools/ComfyUi/` にある `ComfyUi_LatestVersion.bat` や `ComfyUiManager_LatestVersion.bat` を実行しておくと、その時点での最新リリースバージョンに更新できます。
 
-## [Wan2.2 Day-0 Support in ComfyUI](https://blog.comfy.org/p/wan22-day-0-support-in-comfyui) 手順
-
-Geforce RTX 3060 12GB & RAM 64GB 環境（RAM は 32GB でも動きそう）で [ComfyUI 公式 Wan 2.2 Day0 記事](https://blog.comfy.org/p/wan22-day-0-support-in-comfyui) の "Wan 2.2 5B Video Generation" を動かせました。以下公式そのまんまな手順。
-
-1. SimpleComfyUi をインストールして `ComfyUi.bat` で起動します。
-2. （左ではなく）上部メニューの `ワークフロー` - `テンプレートを参照` を選択。
-3. ダイアログ左側の `ビデオ` 選択で、右側の `Wan 2.2 5B Video Generation` を選択。
-4. 足りないモデルが 3種類表示されるので、それぞれダウンロードして配置。
-	- `wan2.2_ti2v_5B_fp16.safetensors` は `ComfyUI/models/diffusion_models` に配置。
-	- `umt5_xxl_fp8_e4m3fn_scaled.safetensors` は `ComfyUI/models/text_encoders` に配置。
-	- `wan2.2_vae.safetensors` は `ComfyUI/models/vae` に配置。
-5. `実行` で生成された動画が `output/video/` に保存されます。
-
-I2V は VRAM 消費が大きいようで、`拡散モデルを読み込む` の `重みdtype` を `fp8_e4m3fn` にしたら動きました。  
-解像度やフレーム数を下げてみても良いかもしれません。
-
-## [Kijai/WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper) の導入手順
-
-2025/07/29 21:00  
-大きい方のモデルである I2V A14B の GGUF を試してみたら、VRAM 8GB & RAM 32GB で普通に利用できそうでした。  
-RAM を 1枚抜いた RAM 32GB シングルチャンネルと Geforce RTX 3060 12GB 環境では、余裕を持って利用できています。  
-メモリスワップ込みで RAM 16GB で利用できるかどうかは、わかりません。
-
-![](https://yyy.wpx.jp/2025/07/20250729-Wan22Day1-Q4Q3.webp)
-~~2025/07/29 の夕方時点で、Geforce RTX 3060 VRAM 12GB, RAM 64GB 環境において `512x768` の 81frame を 7分程度で生成できています。~~  
-Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに古くなる可能性が高いです。
-
-1. [example_workflows/](https://github.com/kijai/ComfyUI-WanVideoWrapper/tree/main/example_workflows) から利用したいワークフローをダウンロードします。
-	- [wanvideo2_2_I2V_A14B_example_WIP.json](https://github.com/kijai/ComfyUI-WanVideoWrapper/raw/refs/heads/main/example_workflows/wanvideo2_2_I2V_A14B_example_WIP.json) を右クリックから保存。  
-	ファイル名の通り WIP なので近日中にリンク切れになる可能性が高いです。
-2. `ComfyUi.bat` で起動して、ワークフローをドラッグ＆ドロップで開きます。
-3. `Missing Node Types` が表示されるので、下の `Open Manager` を開いてから、右上の `すべての不足しているノードをインストール`（ラベルに見えますがボタンです）します。
-	- インストールが終わると、下に `変更を適用するには、ComfyUIを再起動してください` と表示されるので `再起動` します。
-4. 再起動が完了したら `実行する` でファイルが不足しているエラーが表示されますので、必要なファイルをダウンロードします。
-	- `oldman_upscaled.png` はお好みの画像をドラッグ＆ドロップします。
-		- 画像の内容に合わせて `WanVideo TextEncode` のプロンプトを書き換えます。  
-		**[プロンプト参考情報](https://www.instasd.com/post/wan2-2-whats-new-and-how-to-write-killer-prompts)**
-	- [Wan2_2-I2V-A14B-HIGH_fp8_e4m3fn_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-HIGH_fp8_e4m3fn_scaled_KJ.safetensors) と [Wan2_2-I2V-A14B-LOW_fp8_e4m3fn_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-LOW_fp8_e4m3fn_scaled_KJ.safetensors) を `ComfyUI/models/diffusion_models/WanVideo/2_2/` フォルダに置きます。
-		- **リッチなビデオカードでなければ、下で紹介している GGUF がオススメです。**
-	- [lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors) を `ComfyUI/models/loras/WanVideo/Lightx2v/` フォルダに置きます。
-	- [umt5-xxl-enc-bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/umt5-xxl-enc-bf16.safetensors) を `ComfyUI/models/clip/` フォルダに置きます。
-	- [Wan2_1_VAE_bf16.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan2_1_VAE_bf16.safetensors) を `ComfyUI/models/vae/wanvideo/` フォルダに置きます。  
-		- 5B 用？の Wan 2.2 版 [wan2.2_vae.safetensors](https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan2.2_vae.safetensors)
-5. ファイルをダウンロードしたら `実行する` で動画を生成します。
-	- パソコンのスペックが十分出なかった場合はエラーが表示されます。  
-	次の『Geforce RTX 3060 12GB での Kijai/WanVideoWrapper サンプル動作』を参考に対処してください。
-	- **2025/07/29 時点でワークフローからインストールされる Kijai/WanVideoWrapper はバージョンが一致せず、`WanVideoModelLoader` で `blocks.0.cross_attn.k_img.weight` エラーが発生します。**  
-		- 上部の `Manager` から `Custom Nodes In Workflow` し、`ComfyUI-WanVideoWrapper` の `Switch Ver` で `nightly` を `Select` して `Restart` してください。
-		- **また、エラーが起きている状態でワークフローを保存してしまうと、`Split_step` の接続の切れた状態で保存されて生成動画が白飛びするそうです。保存しない・ワークフローをダウンロードし直す、などで対処してください。**
-
-`Video Combine` の `frame_rate` は `24` が正しいかもしれません。
-
-### Geforce RTX 3060 12GB での [Kijai/WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper) サンプル動作
-
-- `WanVideo TextEncode` でエラーが出る場合は、`WanVideo T5 Text Encoder Loader` の `quantization` を `fp8_e4m3fn` にします。
-	- その場合は、[umt5-xxl-enc-fp8_e4m3fn.safetensors](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/umt5-xxl-enc-fp8_e4m3fn.safetensors) を代わりに利用するとメインメモリの消費を抑えられます。
-- ~~Geforce RTX 30x0 ではふたつの `WanVideo Model Loader` で [Wan2_2-I2V-A14B-HIGH_fp8_e5m2_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-HIGH_fp8_e5m2_scaled_KJ.safetensors) と [Wan2_2-I2V-A14B-LOW_fp8_e5m2_scaled_KJ.safetensors](https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/resolve/main/I2V/Wan2_2-I2V-A14B-LOW_fp8_e5m2_scaled_KJ.safetensors) を代わりに利用し、 `quantization` を `fp8_e5m2_scaled` に変更します。~~
-	- ~~もしくは `WanVideo Torch Compile Settings` を `Ctrl+B` でミュートします。~~
-- ふたつの `WanVideo Model Loader` で [wan2.2_i2v_high_noise_14B_Q4_K_M.gguf](https://huggingface.co/bullerwins/Wan2.2-I2V-A14B-GGUF/resolve/main/wan2.2_i2v_high_noise_14B_Q4_K_M.gguf) と [wan2.2_i2v_low_noise_14B_Q4_K_M.gguf](https://huggingface.co/bullerwins/Wan2.2-I2V-A14B-GGUF/resolve/main/wan2.2_i2v_low_noise_14B_Q4_K_M.gguf) を代わりに利用し、 `quantization` を `disabled` に変更します。
-	- 他の精度を選ぶなら [こちら](https://huggingface.co/bullerwins/Wan2.2-I2V-A14B-GGUF) から。
-- `WanVideo Block Swap` の `blocks_to_swap` を `40` に、`offload_img_emb` と `offload_txt_emb` を `true` にします。
-- まだ VRAM が足りない場合は `WanVideo ImageToVideo Encode` の `num_frames` を減らしたり、`Resize Image v2` の `width` や `height` を減らしたりします。
-
 ## 仕様
 
 - `ComfyUi_Activate.bat` で `venv\Scripts\activate` したコンソールを開きます。
 - Git にパスが通っていれば利用し、無ければポータブル版をインストールします。
-- Python は 3.12.x にパスが通っていれば利用し、無ければポータブル版をインストールします。
+- Python は 3.10.x にパスが通っていれば利用し、無ければポータブル版をインストールします。
 - ComfyUI と ComfyUI Manager は、インストール時にリリースされている最新バージョンをインストールします。
 	- バージョンを変更したい場合は `EasyTools/ComfyUi/` にある `ComfyUi-Version.txt` と `ComfyUiManager-Version.txt` の内容をリリース済みバージョンに変更してください。
 	- `ComfyUi-Version.txt` や `ComfyUiManager-Version.txt` を削除すると、リポジトリの最新リビジョンに更新します。
@@ -102,7 +39,19 @@ Kijai/WanVideoWrapper が絶賛開発中ですので以下の情報がすぐに�
 	- `torch`, `torchvision`, `torchaudio`
 	- `triton`, `sageattention`
 
-<!-- ## トラブルシューティング -->
+<!--
+README.md を英訳して README_en.md を更新します。
+-->
+
+## 主な更新
+
+### 2025/09/20
+
+- デフォルトのバージョンを安定動作に実績のあるバージョンに変更しました。
+	- Python 3.10
+	- PyTorch 3.7.1+cu2.8.0
+	- SageAttention をコマンドラインオプションから削除。
+		- ノードで有効にするか、`ComfyUi.bat` を別名コピーして、引数に `--use-sage-attention` を追加。
 
 ## ライセンス
 
