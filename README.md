@@ -49,7 +49,7 @@ README.md を英訳して README_en.md を更新します。
 
 - デフォルトのバージョンを安定動作に実績のあるバージョンに変更しました。
 	- Python 3.10
-	- PyTorch 3.7.1+cu2.8.0
+	- PyTorch 2.7.1+cu2.8.0
 	- SageAttention をコマンドラインオプションから削除。
 		- ノードで有効にするか、`ComfyUi.bat` を別名コピーして、引数に `--use-sage-attention` を追加。
 
