@@ -45,6 +45,14 @@ README.md を英訳して README_en.md を更新します。
 
 ## Major Updates
 
+### 2025/09/23
+
+- Added `Setup-QwenImageEdit2509.bat` to easily try [Qwen-Image-Edit-2509](https://huggingface.co/Qwen/Qwen-Image-Edit-2509).
+	- After running the setup, you can use QwenImageEdit with the workflow `QwenImageEdit2509.json`.
+	- Mainly operate the green nodes.
+	- `TranslatePrompt` translates Japanese prompts to English.
+	- Will be removed when no longer relevant.
+
 ### 2025/09/20
 
 - Changed default versions to those with proven stable operation.

@@ -40,10 +40,18 @@ NVIDIA ビデオカードを搭載した Windows PC で [ComfyUI](https://github
 	- `triton`, `sageattention`
 
 <!--
-README.md を英訳して README_en.md を更新します。
+README.md を英訳して、更新箇所に合わせて README_en.md を更新します。主に『主な更新』を更新します。
 -->
 
 ## 主な更新
+
+### 2025/09/23
+
+-  [Qwen-Image-Edit-2509](https://huggingface.co/Qwen/Qwen-Image-Edit-2509) を簡単に試せる `Setup-QwenImageEdit2509.bat` を追加しました。
+	- セットアップの実行後に、ワークフローの `QwenImageEdit2509.json` で QwenImageEdit を利用できます。
+	- 主に緑色のノードを操作します。
+	- `TranslatePrompt` は日本語プロンプトを英訳します。
+	- 旬が過ぎたら削除します。
 
 ### 2025/09/20
 
